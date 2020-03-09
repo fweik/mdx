@@ -6,7 +6,8 @@
 
 using namespace mdx;
 
-BOOST_AUTO_TEST_CASE(eval_integer_) {
+BOOST_AUTO_TEST_CASE(eval_integer_)
+{
   using namespace Expression;
 
   using Expr = Integer<5>;
@@ -16,7 +17,8 @@ BOOST_AUTO_TEST_CASE(eval_integer_) {
   BOOST_CHECK_EQUAL(result, 5);
 }
 
-BOOST_AUTO_TEST_CASE(eval_symbol_) {
+BOOST_AUTO_TEST_CASE(eval_symbol_)
+{
   using namespace Expression::Variables;
 
   auto const result = evaluate<int, X>(value<X>(5));
