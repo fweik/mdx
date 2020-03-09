@@ -65,7 +65,7 @@ namespace detail {
   struct Eval<Expression::Integer<val>>
   {
     template<class T, class Args>
-    static T eval(Args) { return val; }
+    static T eval(Args /* arguments */) { return val; }
   };
 
   template<class STag>

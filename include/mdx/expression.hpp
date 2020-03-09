@@ -16,14 +16,6 @@ namespace Expression {
   using Unary = Expr<Tag, Arg>;
   template<class Tag, class Arg1, class Arg2>
   using Binary = Expr<Tag, Arg1, Arg2>;
-
-  /**
- * @brief Number of argument of an expression.
- */
-  template<class>
-  size_t arity;
-  template<class Tag, class... Args>
-  constexpr size_t arity<Expr<Tag, Args...>> = sizeof...(Args);
 }// namespace Expression
 
 namespace Grammar {
