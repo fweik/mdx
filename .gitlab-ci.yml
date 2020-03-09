@@ -6,6 +6,6 @@ variables:
 test:
   script:
     - mkdir build && cd build
-    - cmake -DENABLE_CLANG_TIDY=ON ..
+    - cmake -DENABLE_CLANG_TIDY=ON -DENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON ..
     - make
     - make test
