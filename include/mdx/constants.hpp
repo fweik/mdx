@@ -35,7 +35,7 @@ template <class T> using Symbol = Nullary<Tags::Symbol<T>>;
 /**
  * @brief Variable.
  *
- * @tparam c Signel character name for the variable.
+ * @tparam c Single character name for the variable.
  */
 template <char c> using Variable = Symbol<std::integral_constant<char, c>>;
 

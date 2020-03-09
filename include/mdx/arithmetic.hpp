@@ -1,6 +1,7 @@
 #ifndef OBSERVABLES_ARITHMATIC_HPP
 #define OBSERVABLES_ARITHMATIC_HPP
 
+#include "algorithms.hpp"
 #include "evaluate.hpp"
 #include "expression.hpp"
 
@@ -57,7 +58,7 @@ template <class Arg1, class Arg2> using Power = Binary<Tags::Power, Arg1, Arg2>;
  * f(x1, ... xn) = x1 + ... + xn
  *
  */
-template <class... Expr> using Sum = left_fold<Plus, Expr...>;
+template <class... Expr> using Sum = Algorithms::right_fold<Plus, Expr...>;
 
 /**
  * @brief Product expression.
@@ -65,12 +66,9 @@ template <class... Expr> using Sum = left_fold<Plus, Expr...>;
  * f(x1, ... xn) = x1 * ... * xn
  *
  */
-template <class... Expr> using Product = left_fold<Multiplies, Expr...>;
+template <class... Expr>
+using Product = Algorithms::right_fold<Multiplies, Expr...>;
 } // namespace Expression
-
-namespace Grammar {
-
-}
 
 namespace detail {
 template <class Arg> struct Eval<Expression::Negate<Arg>> {
@@ -92,6 +90,5 @@ struct Eval<Expression::Multiplies<Arg1, Arg2>> {
   }
 };
 } // namespace detail
-
 } // namespace mdx
 #endif // OBSERVABLES_ARITHMATIC_HPP

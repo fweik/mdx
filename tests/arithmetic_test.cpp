@@ -2,8 +2,8 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
-#include <observables/arithmetic.hpp>
-#include <observables/constants.hpp>
+#include <mdx/arithmetic.hpp>
+#include <mdx/constants.hpp>
 
 BOOST_AUTO_TEST_CASE(eval_plus_) {
   using namespace mdx::Expression;
