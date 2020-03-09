@@ -68,6 +68,10 @@ template <class... Expr> using Sum = left_fold<Plus, Expr...>;
 template <class... Expr> using Product = left_fold<Multiplies, Expr...>;
 } // namespace Expression
 
+namespace Grammar {
+
+}
+
 namespace detail {
 template <class Arg> struct Eval<Expression::Negate<Arg>> {
   template <class T, class Args> static T eval(Args const &args) {
