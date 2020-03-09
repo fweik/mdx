@@ -10,8 +10,8 @@ using namespace mdx::Expression;
 
 BOOST_AUTO_TEST_CASE(is_vector_)
 {
-  static_assert(is_vector<Vector<>>, "");
-  static_assert(not is_vector<int>, "");
+  static_assert(is_vector<Vector<>>::value, "");
+  static_assert(not is_vector<int>::value, "");
 }
 
 template<class T, class U>

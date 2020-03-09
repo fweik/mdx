@@ -24,9 +24,13 @@ namespace Expression {
   using Component = Unary<Tags::Component<I>, Expr>;
 
   template<class...>
-  constexpr bool is_vector = false;
+  struct is_vector : std::false_type
+  {
+  };
   template<class... Components>
-  constexpr bool is_vector<Vector<Components...>> = true;
+  struct is_vector<Vector<Components...>> : std::true_type
+  {
+  };
 
   namespace detail {
     template<class, class, class = void>
