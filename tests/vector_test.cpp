@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE(is_vector_)
 template<class T, class U>
 constexpr bool is_same = std::is_same<T, U>::value;
 template<class T, class U>
-constexpr bool expands_to = std::is_same<mdx::Grammar::expand<T>, U>::value;
+constexpr bool expands_to = is_same<mdx::Grammar::expand<T>, U>;
 
 BOOST_AUTO_TEST_CASE(component_)
 {
