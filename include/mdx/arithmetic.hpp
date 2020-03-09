@@ -89,6 +89,12 @@ struct Eval<Expression::Multiplies<Arg1, Arg2>> {
     return evaluate<T, Arg1>(args) * evaluate<T, Arg2>(args);
   }
 };
+
+template <class Arg1, class Arg2> struct Eval<Expression::Divides<Arg1, Arg2>> {
+  template <class T, class Args> static T eval(Args const &args) {
+    return evaluate<T, Arg1>(args) / evaluate<T, Arg2>(args);
+  }
+};
 } // namespace detail
 } // namespace mdx
 #endif // OBSERVABLES_ARITHMATIC_HPP
