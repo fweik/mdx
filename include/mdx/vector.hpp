@@ -4,6 +4,7 @@
 #include "arithmetic.hpp"
 #include "expression.hpp"
 
+#include <array>
 #include <tuple>
 #include <type_traits>
 
@@ -23,7 +24,29 @@ using Component = Unary<Tags::Component<I>, Expr>;
 template <class...> constexpr bool is_vector = false;
 template <class... Components>
 constexpr bool is_vector<Vector<Components...>> = true;
+
+namespace detail {
+template <class, class, class = void> struct dot_impl;
+template <class... Components1, class... Components2>
+struct dot_impl<
+    Vector<Components1...>, Vector<Components2...>,
+    std::enable_if_t<sizeof...(Components1) == sizeof...(Components2)>> {
+  using type = Sum<Product<Components1, Components2>...>;
+};
+} // namespace detail
+
+template <class Expr1, class Expr2>
+using Dot = typename detail::dot_impl<Expr1, Expr2>::type;
 } // namespace Expression
+
+namespace detail {
+template <class... Components> struct Eval<Expression::Vector<Components...>> {
+  template <class T, class Args>
+  static std::array<T, sizeof...(Components)> eval(Args const &args) {
+    return {evaluate<T, Components>(args)...};
+  }
+};
+} // namespace detail
 
 namespace Grammar {
 template <class... Components> struct rule<Expression::Vector<Components...>> {
@@ -37,5 +60,4 @@ struct rule<Expression::Component<I, Expression::Vector<Components...>>> {
 };
 } // namespace Grammar
 } // namespace mdx
-
 #endif // OBSERVABLES_VECTOR_HPP

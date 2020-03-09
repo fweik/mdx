@@ -5,7 +5,7 @@
 
 namespace mdx {
 namespace detail {
-template <class Expr> struct Eval;
+template <class Expr, class = void> struct Eval;
 
 template <class T, class Expr> struct Value;
 

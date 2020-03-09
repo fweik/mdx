@@ -40,6 +40,9 @@ template <class T> using Symbol = Nullary<Tags::Symbol<T>>;
 template <char c> using Variable = Symbol<std::integral_constant<char, c>>;
 
 namespace Variables {
+using U = Variable<'u'>;
+using V = Variable<'v'>;
+using W = Variable<'w'>;
 using X = Variable<'x'>;
 using Y = Variable<'y'>;
 using Z = Variable<'z'>;
