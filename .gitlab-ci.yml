@@ -6,6 +6,6 @@ variables:
 test:
   script:
     - mkdir build && cd build
-    - cmake ..
+    - cmake -DENABLE_CLANG_TIDY=ON ..
     - make
     - make test

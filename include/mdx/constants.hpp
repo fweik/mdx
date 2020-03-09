@@ -7,66 +7,84 @@
 
 namespace mdx {
 namespace Expression {
-namespace Tags {
-template <class Integral, Integral> struct Constant;
-template <class STag> struct Symbol;
-} // namespace Tags
+  namespace Tags {
+    template<class Integral, Integral>
+    struct Constant;
+    template<class STag>
+    struct Symbol;
+  }// namespace Tags
 
-/**
+  /**
  * @brief Constant expression that represents an integral number.
  *
  * @tparam value Value of the constant.
  */
-template <int value> using Integer = Nullary<Tags::Constant<int, value>>;
+  template<int value>
+  using Integer = Nullary<Tags::Constant<int, value>>;
 
-/**
+  /**
  * @brief Rational Number expression.
  */
-template <int nominator, int denominator>
-using Rational = Divides<Integer<nominator>, Integer<denominator>>;
+  template<int nominator, int denominator>
+  using Rational = Divides<Integer<nominator>, Integer<denominator>>;
 
-/**
+  /**
  * @brief Symbol.
  *
  * @tparam T Identifier of the symbol.
  */
-template <class T> using Symbol = Nullary<Tags::Symbol<T>>;
+  template<class T>
+  using Symbol = Nullary<Tags::Symbol<T>>;
 
-/**
+  /**
  * @brief Variable.
  *
  * @tparam c Single character name for the variable.
  */
-template <char c> using Variable = Symbol<std::integral_constant<char, c>>;
+  template<char c>
+  using Variable = Symbol<std::integral_constant<char, c>>;
 
-namespace Variables {
-using U = Variable<'u'>;
-using V = Variable<'v'>;
-using W = Variable<'w'>;
-using X = Variable<'x'>;
-using Y = Variable<'y'>;
-using Z = Variable<'z'>;
-} // namespace Variables
-} // namespace Expression
+  namespace Variables {
+    using U = Variable<'u'>;
+    using V = Variable<'v'>;
+    using W = Variable<'w'>;
+    using X = Variable<'x'>;
+    using Y = Variable<'y'>;
+    using Z = Variable<'z'>;
+  }// namespace Variables
+}// namespace Expression
 
 namespace detail {
-template <class T, class Symbol> struct Value { T val; };
+  template<class T, class Symbol>
+  struct Value
+  {
+    T val;
+  };
 
-template <int val> struct Eval<Expression::Integer<val>> {
-  template <class T, class Args> static T eval(Args) { return val; }
-};
+  template<int val>
+  struct Eval<Expression::Integer<val>>
+  {
+    template<class T, class Args>
+    static T eval(Args /* arguments */) { return val; }
+  };
 
-template <class STag> struct Eval<Expression::Symbol<STag>> {
-  template <class T, class Args> static T eval(Args const &args) {
-    return std::get<Value<T, Expression::Symbol<STag>>>(args).val;
-  }
-};
-} // namespace detail
+  template<class STag>
+  struct Eval<Expression::Symbol<STag>>
+  {
+    template<class T, class Args>
+    static T eval(Args const &args)
+    {
+      return std::get<Value<T, Expression::Symbol<STag>>>(args).val;
+    }
+  };
+}// namespace detail
 
-template <class Symbol, class T> detail::Value<T, Symbol> value(T const &val) {
-  return {val};
+template<class Symbol, class T>
+detail::Value<T, Symbol> value(T const &val)
+{
+  return { val };
 }
 
-} // namespace mdx
+}// namespace mdx
 
-#endif // OBSERVABLES_CONSTANTS_HPP
+#endif// OBSERVABLES_CONSTANTS_HPP

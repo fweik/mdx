@@ -1,11 +1,12 @@
-#define BOOST_TEST_MODULE observables_test
+#define BOOST_TEST_MODULE mdx
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
 #include <mdx/arithmetic.hpp>
 #include <mdx/constants.hpp>
 
-BOOST_AUTO_TEST_CASE(eval_plus_) {
+BOOST_AUTO_TEST_CASE(eval_plus_)
+{
   using namespace mdx::Expression;
   using mdx::evaluate;
 
@@ -15,7 +16,8 @@ BOOST_AUTO_TEST_CASE(eval_plus_) {
   BOOST_CHECK_EQUAL(result, 3);
 }
 
-BOOST_AUTO_TEST_CASE(eval_multiplies_) {
+BOOST_AUTO_TEST_CASE(eval_multiplies_)
+{
   using namespace mdx::Expression;
   using mdx::evaluate;
 
@@ -25,16 +27,19 @@ BOOST_AUTO_TEST_CASE(eval_multiplies_) {
   BOOST_CHECK_EQUAL(result, 6);
 }
 
-template <class T, class U> constexpr bool is_same = std::is_same<T, U>::value;
+template<class T, class U>
+constexpr bool is_same = std::is_same<T, U>::value;
 
-BOOST_AUTO_TEST_CASE(sum_expr_) {
+BOOST_AUTO_TEST_CASE(sum_expr_)
+{
   using namespace mdx::Expression;
   using namespace Variables;
 
   static_assert(is_same<Sum<X, Y, Z>, Plus<X, Plus<Y, Z>>>, "");
 }
 
-BOOST_AUTO_TEST_CASE(product_expr_) {
+BOOST_AUTO_TEST_CASE(product_expr_)
+{
   using namespace mdx::Expression;
   using namespace Variables;
 
