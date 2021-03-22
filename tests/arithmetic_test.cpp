@@ -35,7 +35,7 @@ BOOST_AUTO_TEST_CASE(sum_expr_)
   using namespace mdx::Expression;
   using namespace Variables;
 
-  static_assert(is_same<Sum<X, Y, Z>, Plus<X, Plus<Y, Z>>>, "");
+  static_assert(is_same<Sum<X, Y, Z>, Plus<X, Plus<Y, Z>>>);
 }
 
 BOOST_AUTO_TEST_CASE(product_expr_)
@@ -43,5 +43,5 @@ BOOST_AUTO_TEST_CASE(product_expr_)
   using namespace mdx::Expression;
   using namespace Variables;
 
-  static_assert(is_same<Product<X, Y, Z>, Multiplies<X, Multiplies<Y, Z>>>, "");
+  static_assert(is_same<Product<X, Y, Z>, Multiplies<X, Multiplies<Y, Z>>>);
 }
